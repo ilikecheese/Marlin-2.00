@@ -626,7 +626,7 @@
   // Delta calibration menu
   // uncomment to add three points calibration menu option.
   // See http://minow.blogspot.com/index.html#4918805519571907051
-  //#define DELTA_CALIBRATION_MENU
+  #define DELTA_CALIBRATION_MENU
 
   // uncomment to add G33 Delta Auto-Calibration (Enable EEPROM_SETTINGS to store results)
   #define DELTA_AUTO_CALIBRATION
@@ -635,7 +635,7 @@
 
   #if ENABLED(DELTA_AUTO_CALIBRATION)
     // set the default number of probe points : n*n (1 -> 7)
-    #define DELTA_CALIBRATION_DEFAULT_POINTS  5.0 //4
+    #define DELTA_CALIBRATION_DEFAULT_POINTS  5 //4
   #endif
 
   #if EITHER(DELTA_AUTO_CALIBRATION, DELTA_CALIBRATION_MENU)
@@ -650,23 +650,40 @@
   #define DELTA_DIAGONAL_ROD 214.3 //218.0        // (mm)
 
   // Distance between bed and nozzle Z home position
-  #define DELTA_HEIGHT 278.23 //280.00             // (mm) Get this value from G33 auto calibrate
+  #define DELTA_HEIGHT 284.44 //287.72 //278.23 //280.00             // (mm) Get this value from G33 auto calibrate
 
-  #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
+  #define DELTA_ENDSTOP_ADJ {+0.00, -3.65, -1.30} //{ 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
 
   // Horizontal distance bridged by diagonal push rods when effector is centered.
-  #define DELTA_RADIUS 101.0              // (mm) Get this value from G33 auto calibrate
+  #define DELTA_RADIUS 108.40 //101.0              // (mm) Get this value from G33 auto calibrate
 
   // Trim adjustments for individual towers
   // tower angle corrections for X and Y tower / rotate XYZ so Z tower angle = 0
   // measured in degrees anticlockwise looking from above the printer
-  #define DELTA_TOWER_ANGLE_TRIM { 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
+  #define DELTA_TOWER_ANGLE_TRIM {-1.10, +1.23, -0.13} //{ 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
 
   // Delta radius and diagonal rod adjustments (mm)
   //#define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
   //#define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 }
 
 #endif
+//.Height:284.41  Ex:+0.00  Ey:-3.63  Ez:-1.33  Radius:108.38
+//.               Tx:-1.10  Ty:+1.24  Tz:-0.14
+
+//.Height:284.40  Ex:+0.00  Ey:-3.65  Ez:-1.30  Radius:108.40
+//.               Tx:-1.10  Ty:+1.23  Tz:-0.13
+
+//.Height:284.40  Ex:+0.00  Ey:-3.61  Ez:-1.35  Radius:108.43
+//.               Tx:-1.13  Ty:+1.24  Tz:-0.11
+
+//.Height:284.94 Ex:+0.00 Ey:-3.62 Ez:-0.74 Radius:108.45
+//             . Tx:-1.21 Ty:+1.43 Tz:-0.22
+
+//.Height:284.94 Ex:+0.00 Ey:-3.62 Ez:-0.74 Radius:108.45
+//.              Tx:-1.21 Ty:+1.43 Tz:-0.22
+
+//.Height:284.96 Ex:+0.00 Ey:-3.56 Ez:-0.73 Radius:108.35
+//.              Tx:-1.18 Ty:+1.39 Tz:-0.22
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -750,7 +767,7 @@
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-//#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Threshold
@@ -850,7 +867,7 @@
  */
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 35.0 //10.0
+  #define DEFAULT_XJERK 10.0 //35.00
   #define DEFAULT_YJERK DEFAULT_XJERK
   #define DEFAULT_ZJERK DEFAULT_XJERK // Must be same as XY for delta
 
@@ -881,7 +898,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1041,10 +1058,10 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0.25 }
+#define NOZZLE_TO_PROBE_OFFSET { 0, 25, -.38 }
 
 // Certain types of probes need to stay away from edges
-#define MIN_PROBE_EDGE 10
+#define MIN_PROBE_EDGE 25
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 2000
@@ -1086,10 +1103,10 @@
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -20 //-2 //CHANGE // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -20
+#define Z_PROBE_OFFSET_RANGE_MIN -50 //-20 //CHANGE
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
@@ -1140,9 +1157,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR true
+#define INVERT_X_DIR false //true
+#define INVERT_Y_DIR false //true
+#define INVERT_Z_DIR false //true
 
 // @section extruder
 
@@ -1160,7 +1177,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-#define Z_HOMING_HEIGHT 30 //15   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 15   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -1178,7 +1195,7 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS -(DELTA_PRINTABLE_RADIUS)
 #define Y_MIN_POS -(DELTA_PRINTABLE_RADIUS)
-#define Z_MIN_POS -5 //0
+#define Z_MIN_POS -20 //-5 //0 //CHANGE
 #define X_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Y_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Z_MAX_POS MANUAL_Z_HOME_POS
@@ -1193,7 +1210,7 @@
  */
 
 // Min software endstops constrain movement within minimum coordinate bounds
-//#define MIN_SOFTWARE_ENDSTOPS
+#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
@@ -1292,9 +1309,10 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-//#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28
 
 /**
+ * 
  * Enable detailed logging of G28, G29, M48, etc.
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
@@ -1444,7 +1462,7 @@
 #endif
 
 // Delta only homes to Z
-#define HOMING_FEEDRATE_Z  (100*60) //(45*60)
+#define HOMING_FEEDRATE_Z   (75*60) //(45*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1559,12 +1577,12 @@
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 220 //180
 #define PREHEAT_1_TEMP_BED      0 //70
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   200 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 260
 #define PREHEAT_2_TEMP_BED     60 //100
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED   200 // Value from 0 to 255
 
 /**
  * Nozzle Park
