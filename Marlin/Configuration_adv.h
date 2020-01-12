@@ -399,7 +399,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN PE5  //check 'pins_BTT_SKR_PRO_V1_1.h' for fan pins
+#define E0_AUTO_FAN_PIN PE6  //check 'pins_BTT_SKR_PRO_V1_1.h' for fan pins
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
